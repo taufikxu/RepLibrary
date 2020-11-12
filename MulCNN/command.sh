@@ -1,0 +1,1 @@
+python train.py ./configs/cifar_baseline.yaml
