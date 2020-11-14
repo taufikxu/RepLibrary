@@ -18,7 +18,7 @@ class Evaluator(object):
         with torch.no_grad():
             for x, y in test_iters:
                 x, y = x.to(self.device), y.to(self.device)
-                _, _, logit1 = self.mOnline(x)
+                logit1 = self.model(x)
                 loss_list.append(self.ce_loss(logit1, y).item())
                 acc_list.append(top_k_acc(logit1, y, 1).item())
 

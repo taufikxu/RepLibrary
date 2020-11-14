@@ -28,19 +28,20 @@ checkpoint_io = CheckpointIO(checkpoint_dir=MODELS_FOLDER)
 checkpoint_io.register_modules(model=model, optim=optim)
 logger = Logger(log_dir=SUMMARIES_FOLDER)
 
-trainer = trainer.Trainer(model, optim)
-evaluater = evaluator.Evaluator(model)
-
 print_interv, eval_interv = 20, 400
 iters, iters_per_epoch = data_iters.get_dataloader()
 iters_total = iters_per_epoch * FLAGS.training.nepoch
 
+trainer = trainer.Trainer(model, optim, iters)
+evaluater = evaluator.Evaluator(model)
+print(model)
+
 x, y = iters.__next__()
-logger.add_imgs(x[:100], "OriginImage")
+logger.add_imgs(x[:100, :3], "OriginImage")
 text_logger.info("Start Training")
 for iter_num in range(iters_total):
     x, y = iters.__next__()
-    return_dict = trainer.step(x.to(device), y.to(device), iter_num)
+    return_dict = trainer.step()
     logger.addvs("Training", return_dict, iter_num)
     scheduler.step()
 

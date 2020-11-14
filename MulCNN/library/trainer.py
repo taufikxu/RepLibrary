@@ -3,8 +3,9 @@ from Tools import FLAGS
 
 
 class Trainer(object):
-    def __init__(self, model, iters):
+    def __init__(self, model, optim, iters):
         self.model = model
+        self.optim = optim
         self.iters = iters
         self.device = FLAGS.device
         self.ce_loss = torch.nn.CrossEntropyLoss()
