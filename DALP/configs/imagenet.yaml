@@ -1,0 +1,19 @@
+dataset: imagenet
+augmentation: baseline
+batch_size: 256
+gpu_number: 1
+
+optim:
+  name: adam
+  lr: 0.0003
+  beta1: 0.9
+  beta2: 0.999
+  weight_decay: 0.0000015
+
+model:
+  name: cifar_resnet18
+  kwargs:
+
+training:
+  nepoch: 1500
+  scheduler: warmup+cosine
