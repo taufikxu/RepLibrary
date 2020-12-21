@@ -1,0 +1,30 @@
+dataset: cifar10
+method: byol
+batch_size: 512
+gpu_number: 1
+
+optim:
+  name: lars
+  lr: 2.0
+  beta1: 0.9
+  beta2: 0.999
+  weight_decay: 0.0000015
+
+model:
+  backbone_name: cifar_resnet18
+  backbone_kwargs:
+  backbone_norm: nn.BatchNorm2d
+  head_norm: nn.BatchNorm1d
+  feature_norm: l2_norm
+  projector:
+    hidden_size: 4096
+    output_size: 256
+  predictor:
+    hidden_size: 4096
+    output_size: 256
+
+training:
+  nepoch: 1500
+  ema_coe: byol
+  ema_coe_val: 0.99
+  scheduler: byol

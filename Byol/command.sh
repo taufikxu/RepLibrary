@@ -1,0 +1,1 @@
+python train.py ./configs/cifar_byol.yaml -subfolder baselines -key rep
